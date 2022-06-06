@@ -13,7 +13,7 @@ import (
 
 const (
 	DB_USER     = "postgres"
-	DB_PASSWORD = "12345678"
+	DB_PASSWORD = "Diamond7*"
 	DB_NAME     = "movies"
 )
 
@@ -38,10 +38,10 @@ func main() {
 	router.HandleFunc("/movies/", GetMovies).Methods("GET")
 
 	// Create a movie
-	router.HandleFunc("/movies/", CreateMovie).Methods("POST")
+	router.HandleFunc("/movie/", CreateMovie).Methods("POST")
 
 	// Delete a specific movie by the movieID
-	router.HandleFunc("/movies/{movieid}", DeleteMovie).Methods("DELETE")
+	router.HandleFunc("/movie/{movieid}", DeleteMovie).Methods("DELETE")
 
 	// Delete all movies
 	router.HandleFunc("/movies/", DeleteMovies).Methods("DELETE")
@@ -116,7 +116,7 @@ func CreateMovie(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Inserting new movie with ID: " + movieID + " and name: " + movieName)
 
 		var lastInsertID int
-		err := db.QueryRow("INSERT INTO movies(movieID, movieName) VALUES($1, $2) returning id;", movieID, movieName).Scan(&lastInsertID)
+		err := db.QueryRow("INSERT INTO movies(movieID, movieNname) VALUES($1, $2) returning id;", movieID, movieName).Scan(&lastInsertID)
 
 		// check errors
 		checkErr(err)
